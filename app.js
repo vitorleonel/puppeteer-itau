@@ -43,5 +43,5 @@ const password = process.argv.pop().split("");
   await page.waitFor(2000);
   await page.click("#btn-continuar");
 
-  console.log(await page.title());
+  console.log(await page.title(), "nois que vaaaaa");
 })();
