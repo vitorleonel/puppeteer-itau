@@ -10,16 +10,18 @@ const password = process.argv.pop().split("");
   });
 
   const page = await browser.newPage();
-  page.setViewport({ width: 0, height: 0 });
+  page.setViewport({ width: 1980, height: 960 });
 
-  await page.goto("https://www.itau.com.br", { waitUntil: "networkidle0" });
+  await page.goto("https://www.itau.com.br", { waitUntil: "networkidle2" });
 
   await page.click("#menuTypeAccess");
   await page.click("#collapseTypeAccess > li:nth-child(2)");
 
   await page.type("#codOp", operator);
+  await page.waitFor(2000);
   await page.click("#btnLoginSubmit");
-  await page.waitForSelector("#campoTeclado", { timeout: 60000 });
+
+  await page.waitForSelector("#campoTeclado", { timeout: 30000 });
 
   await page.waitFor(5000);
 
