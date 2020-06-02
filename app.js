@@ -4,7 +4,10 @@ const operator = process.argv.pop();
 const password = process.argv.pop().split("");
 
 (async () => {
-  const browser = await puppeteer.launch({ headless: true });
+  const browser = await puppeteer.launch({
+    headless: true,
+    args: ["--no-sandbox"],
+  });
 
   const page = await browser.newPage();
   page.setViewport({ width: 0, height: 0 });
