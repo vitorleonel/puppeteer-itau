@@ -4,7 +4,7 @@ const operator = process.argv.pop();
 const password = process.argv.pop().split("");
 
 (async () => {
-  const browser = await puppeteer.launch({ headless: false });
+  const browser = await puppeteer.launch({ headless: true });
 
   const page = await browser.newPage();
   page.setViewport({ width: 0, height: 0 });
@@ -42,4 +42,6 @@ const password = process.argv.pop().split("");
   await page.click("#rdBasico");
   await page.waitFor(2000);
   await page.click("#btn-continuar");
+
+  console.log(await page.title());
 })();
