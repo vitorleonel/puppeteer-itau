@@ -15,6 +15,7 @@ const password = process.argv.pop().split("");
   await page.goto("https://www.itau.com.br", { waitUntil: "networkidle0" });
 
   await page.click("#menuTypeAccess");
+  await page.waitFor(1000);
   await page.click("#collapseTypeAccess > li:nth-child(2)");
 
   await page.waitFor(2000);
