@@ -22,6 +22,7 @@ const password = process.argv.pop().split("");
   await page.waitFor(2000);
   await page.click("#btnLoginSubmit");
 
+  await page.screenshot({ path: "acessou.png" });
   await page.waitForSelector("#campoTeclado", { timeout: 30000 });
 
   await page.waitFor(5000);
