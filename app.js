@@ -12,7 +12,7 @@ puppeteer
   .launch({
     headless: process.env.HEADLESS === "yes",
     defaultViewport: { width: 1280, height: 1024 },
-    args: ["--no-sandbox"],
+    args: ["--no-sandbox", "--disable-dev-shm-usage"],
   })
   .then(async (browser) => {
     const page = await browser.newPage();
