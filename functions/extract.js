@@ -19,11 +19,14 @@ module.exports = async (page) => {
     page.click(
       "#extrato-filtro-lancamentos > div > div:nth-child(2) > div:nth-child(1) > fieldset > div > div:nth-child(2) > button"
     ),
-    page.waitFor(() => {
-      let element = document.querySelector("span.extrato-filtros");
+    page.waitFor(
+      () => {
+        let element = document.querySelector("span.extrato-filtros");
 
-      return element && element.innerText.includes("entradas");
-    }),
+        return element && element.innerText.includes("entradas");
+      },
+      { timeout: 60000 }
+    ),
     sleep(1000),
     page.addScriptTag({
       path: path.join(__dirname, "..", "utils", "extract.js"),
