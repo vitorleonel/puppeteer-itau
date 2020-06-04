@@ -24,4 +24,6 @@ puppeteer
 
     await authenticateFunction(page);
     await extractFunction(page);
+
+    await browser.close();
   });
