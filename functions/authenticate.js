@@ -20,6 +20,7 @@ const codeHandler = async (page) => {
 };
 
 const passwordHandler = async (page) => {
+  await sleep(1000);
   await page.waitForSelector("#campoTeclado", { timeout: 30000 });
   await sleep(3000);
 
