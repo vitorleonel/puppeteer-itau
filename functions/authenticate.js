@@ -14,7 +14,10 @@ const codeHandler = async (page) => {
   await sleep(1000);
 
   await Promise.all([
-    page.click("#btnLoginSubmit"),
+    page.evaluate(() => {
+      let button = document.querySelector("#btnLoginSubmit");
+      button.click();
+    }),
     page.waitForNavigation({ waitUntil: "load", timeout: 30000 }),
   ]);
 };
