@@ -9,7 +9,7 @@ const extractFunction = require("./functions/extract");
 puppeteer.use(StealthPlugin());
 
 puppeteer
-  .launch({ headless: process.env.HEADLESS === "yes" })
+  .launch({ headless: process.env.HEADLESS === "yes", defaultViewport: null })
   .then(async (browser) => {
     const page = await browser.newPage();
     page.setViewport({ width: 1280, height: 1024 });
