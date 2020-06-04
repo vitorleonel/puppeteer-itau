@@ -63,7 +63,7 @@ const viewHandler = async (page) => {
 
   await Promise.all([
     page.click("#btn-continuar"),
-    page.waitForNavigation({ waitUntil: "networkidle2" }),
+    page.waitForNavigation({ waitUntil: "networkidle2", timeout: 60000 }),
   ]);
 };
 
