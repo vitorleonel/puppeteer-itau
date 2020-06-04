@@ -49,6 +49,8 @@ const passwordHandler = async (page) => {
 };
 
 const viewHandler = async (page) => {
+  await sleep(5000);
+
   await page.waitForSelector(
     "#tipoVisao > ul > li:nth-child(2) > p:nth-child(1) > label",
     { timeout: 60000 }
