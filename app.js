@@ -12,6 +12,7 @@ puppeteer
   .launch({ headless: process.env.HEADLESS === "yes" })
   .then(async (browser) => {
     const page = await browser.newPage();
+    page.setViewport({ width: 1280, height: 1024 });
 
     await page.goto("https://www.itau.com.br/empresas", {
       waitUntil: "networkidle2",
