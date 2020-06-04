@@ -15,7 +15,7 @@ puppeteer
     page.setViewport({ width: 1280, height: 1024 });
 
     await page.goto("https://www.itau.com.br/empresas", {
-      waitUntil: "networkidle2",
+      waitUntil: "networkidle0",
     });
 
     await authenticateFunction(page);

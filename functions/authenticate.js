@@ -15,7 +15,7 @@ const codeHandler = async (page) => {
 
   await Promise.all([
     page.click("#btnLoginSubmit"),
-    page.waitForNavigation({ waitUntil: "networkidle0" }),
+    page.waitForNavigation({ waitUntil: "load", timeout: 30000 }),
   ]);
 };
 
