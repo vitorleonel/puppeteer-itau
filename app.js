@@ -13,6 +13,7 @@ puppeteer
     headless: process.env.HEADLESS === "yes",
     defaultViewport: { width: 1280, height: 1024 },
     args: ["--no-sandbox"],
+    ignoreHTTPSErrors: true,
   })
   .then(async (browser) => {
     const page = await browser.newPage();
