@@ -25,7 +25,7 @@ module.exports = async (page) => {
 
         return element && element.innerText.includes("entradas");
       },
-      { timeout: 60000 }
+      { timeout: 1200000 }
     ),
     sleep(1000),
     page.addScriptTag({
