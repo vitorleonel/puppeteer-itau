@@ -1,8 +1,10 @@
 const path = require("path");
 const chunk = require("lodash/chunk");
+const format = require("date-fns/format");
 
 const sleep = require("../utils/sleep");
 const beanstalkdService = require("../services/beanstalkd");
+const slackService = require("../services/slack");
 
 module.exports = async (page) => {
   await Promise.all([
@@ -36,11 +38,19 @@ module.exports = async (page) => {
     }),
   ]);
 
-  const chunkedItems = chunk(await page.evaluate(() => window.jsonOut), 500);
+  const normalItems = await page.evaluate(() => window.jsonOut);
+  const chunkedItems = chunk(normalItems, 500);
 
   for (let index = 0; index < chunkedItems.length; index++) {
     await beanstalkdService.send(chunkedItems[index]);
   }
+
+  slackService.files.upload({
+    channels: process.env.SLACK_CHANNEL_LOG_ID,
+    content: normalItems,
+    filename: `itau-${format(new Date(), "yyyMMdd-Hmmss")}`,
+    filetype: "javascript",
+  });
 
   await sleep(2000);
 };

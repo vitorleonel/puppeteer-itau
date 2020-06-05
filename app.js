@@ -32,8 +32,8 @@ puppeteer.use(StealthPlugin());
   } catch (error) {
     if (process.env.SLACK_TOKEN) {
       slackService.chat.postMessage({
-        channel: process.env.SLACK_CHANNEL_ID,
-        text: error.message,
+        channel: process.env.SLACK_CHANNEL_ALERT_ID,
+        text: `Algo de errado aconteceu:\n\n*Message:*\n${error.message}\n*Stack Trace:* ${error.stack}`,
         username: "Puppeteer - Itaú",
       });
     }
