@@ -11,7 +11,6 @@ module.exports = {
 
     await client.use(process.env.BEANSTALKD_QUEUE);
     await client.put(0, 0, 1, JSON.stringify(payload));
-
-    client.quit();
+    await client.quit();
   },
 };

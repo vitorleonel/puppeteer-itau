@@ -1,5 +1,8 @@
 const path = require("path");
+const chunk = require("lodash/chunk");
+
 const sleep = require("../utils/sleep");
+const beanstalkdService = require("../services/beanstalkd");
 
 module.exports = async (page) => {
   await Promise.all([
@@ -33,7 +36,11 @@ module.exports = async (page) => {
     }),
   ]);
 
-  const json = await page.evaluate(() => window.jsonOut);
+  const chunkedItems = chunk(await page.evaluate(() => window.jsonOut), 500);
 
-  console.log(json);
+  for (let index = 0; index < chunkedItems.length; index++) {
+    await beanstalkdService.send(chunkedItems[index]);
+  }
+
+  await sleep(2000);
 };
