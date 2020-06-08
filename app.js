@@ -12,6 +12,7 @@ puppeteer.use(StealthPlugin());
 
 (async () => {
   let browser;
+  let page;
 
   try {
     browser = await puppeteer.launch({
@@ -21,7 +22,7 @@ puppeteer.use(StealthPlugin());
       ignoreHTTPSErrors: true,
     });
 
-    const page = await browser.newPage();
+    page = await browser.newPage();
 
     await page.goto("https://www.itau.com.br/empresas", {
       waitUntil: "networkidle0",

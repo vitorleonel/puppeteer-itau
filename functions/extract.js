@@ -17,7 +17,10 @@ module.exports = async (page) => {
     page.waitForNavigation({ waitUntil: "networkidle0", timeout: 60000 }),
   ]);
 
-  await page.click("#botaoFecharCoachmark");
+  try {
+    await page.click("#botaoFecharCoachmark");
+  } catch (error) {}
+
   await sleep(1000);
 
   await Promise.all([
