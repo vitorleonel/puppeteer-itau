@@ -18,8 +18,11 @@ puppeteer.use(StealthPlugin());
     browser = await puppeteer.launch({
       headless: process.env.HEADLESS === "yes",
       defaultViewport: { width: 1280, height: 1024 },
-      args: ["--no-sandbox", "--disable-setuid-sandbox"],
-      ignoreHTTPSErrors: true,
+      args: [
+        "--no-sandbox",
+        "--disable-setuid-sandbox",
+        "--disable-dev-shm-usage",
+      ],
     });
 
     page = await browser.newPage();
@@ -31,13 +34,15 @@ puppeteer.use(StealthPlugin());
     await authenticateFunction(page);
     await extractFunction(page);
   } catch (error) {
-    if (process.env.SLACK_TOKEN) {
-      slackService.chat.postMessage({
-        channel: process.env.SLACK_CHANNEL_ALERT_ID,
-        text: `Algo de errado aconteceu:\n\n*Message:*\n${error.message}\n*Stack Trace:* ${error.stack}`,
-        username: "Puppeteer - Itaú",
-      });
-    }
+    console.log(error);
+
+    // if (process.env.SLACK_TOKEN) {
+    //   slackService.chat.postMessage({
+    //     channel: process.env.SLACK_CHANNEL_ALERT_ID,
+    //     text: `Algo de errado aconteceu:\n\n*Message:*\n${error.message}\n*Stack Trace:* ${error.stack}`,
+    //     username: "Puppeteer - Itaú",
+    //   });
+    // }
   }
 
   browser && (await browser.close());
