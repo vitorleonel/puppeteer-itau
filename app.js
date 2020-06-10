@@ -18,7 +18,7 @@ puppeteer.use(StealthPlugin());
     browser = await puppeteer.launch({
       headless: process.env.HEADLESS === "yes",
       defaultViewport: { width: 1280, height: 1024 },
-      args: ["--no-sandbox"],
+      // args: ["--no-sandbox"],
       ignoreHTTPSErrors: true,
     });
 
